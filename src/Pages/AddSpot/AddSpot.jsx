@@ -2,6 +2,8 @@ import { Typewriter } from 'react-simple-typewriter';
 import './AddSpot.css'
 import { useContext } from 'react';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
+import { data } from 'autoprefixer';
+import Swal from 'sweetalert2';
 
 const AddSpot = () => {
     const { user } = useContext(AuthContext)
@@ -18,7 +20,30 @@ const AddSpot = () => {
         const totalVisitors = form.totalVisitors.value;
         const imageURL = form.imageURL.value;
         const newSpot = { spotName, countryName, location, description, cost, season, travelTime, totalVisitors, imageURL, email: user?.email, userName: user?.displayName }
-        console.log(newSpot)
+
+        // send data
+        fetch("http://localhost:5000/spot",
+            {
+                method: "POST",
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(newSpot)
+            }
+        )
+            .then(res => res.json())
+            .then(data => {
+                if (data?.insertedId) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Successfully added this spot! ',
+                        icon: 'success',
+                        confirmButtonText: 'continue'
+                    })
+                    form.reset()
+                }
+            })
+            .catch(error => console.log(error))
     }
     return (
         <div className="hero bg-base-200 min-h-screen">
@@ -99,7 +124,7 @@ const AddSpot = () => {
 
                         </div>
                         <div className="form-control col-span-2 mt-6">
-                            <button className="btn bg-secondary w-full btn-primary">Login</button>
+                            <button className="btn bg-secondary w-full btn-primary">Add Spot</button>
                         </div>
                     </form>
                 </div>
