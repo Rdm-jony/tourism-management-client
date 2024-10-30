@@ -1,0 +1,12 @@
+.shortUnderline:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10%;
+    display: block;
+    height: 3px;
+    background-color: #ff6347;
+    bottom: -10px;
+    
+}

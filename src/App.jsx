@@ -10,11 +10,11 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
-     <Navbar></Navbar>
-     <Outlet></Outlet>
-     <Footer></Footer>
-    </>
+    <div className='font-belleza'>
+      <Navbar></Navbar>
+      <Outlet></Outlet>
+      <Footer></Footer>
+    </div>
   )
 }
 
