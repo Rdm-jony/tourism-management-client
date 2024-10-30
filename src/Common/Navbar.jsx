@@ -1,5 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from '../assets/LOGO.png'
+import { useContext } from "react";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const navlink = <>
     <li><NavLink to="/">Home</NavLink></li>
@@ -8,6 +10,7 @@ const navlink = <>
     <li><NavLink>My List</NavLink></li>
 </>
 const Navbar = () => {
+    const { user } = useContext(AuthContext)
     return (
         <div className="navbar bg-secondary text-neutral-50">
             <div className="navbar-start">
@@ -48,9 +51,21 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link to='/logIn'>
-                    <a className="btn">Log In</a>
-                </Link>
+                {
+                    user ? <div className="flex items-center gap-5">
+                        <div className="avatar tooltip tooltip-bottom tooltip-secondary" data-tip={user?.displayName}>
+                            <div className="ring-primary ring-offset-base-100 w-10 rounded-full ring ring-offset-2 ">
+                                <img src={user?.photoURL} />
+                            </div>
+                        </div>
+                        <Link to='/logIn'>
+                            <a className="btn btn-sm">Log Out</a>
+                        </Link>
+                    </div> : <Link to='/logIn'>
+                        <a className="btn btn-sm">Log In</a>
+                    </Link>
+                }
+
             </div>
         </div>
     );

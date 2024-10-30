@@ -3,10 +3,31 @@ import registerLottie from '../../../public/registerLottie.json'
 import { useForm } from "react-hook-form";
 import { Typewriter } from "react-simple-typewriter";
 import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 const Register = () => {
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const [firebaseError, setFirebaseError] = useState('')
+    const { createUser, updateUser } = useContext(AuthContext)
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
+
     const onSubmit = data => {
-        console.log(data)
+        setFirebaseError('')
+        createUser(data?.email, data?.password)
+            .then(result => {
+                updateUser({ displayName: data?.name, photoURL: data?.photoURL })
+                    .then(result => {
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'Successfully create user!',
+                            icon: 'success',
+                            confirmButtonText: 'ok'
+                        })
+                        reset()
+                    })
+                    .catch(error => setFirebaseError(error.message))
+            })
+            .catch(error => setFirebaseError(error.message))
     };
     return (
         <div className="hero bg-base-200 min-h-screen">
@@ -68,9 +89,13 @@ const Register = () => {
                                 errors.photoURL?.type === 'required' && <p className="text-xs text-red-500">Photo URL is required</p>
                             }
                         </div>
+                        {
+                            firebaseError && <p className="text-xs text-red-500">{firebaseError}</p>
+                        }
                         <div className="form-control mt-6">
                             <button className="btn bg-secondary text-neutral-50">Register</button>
                         </div>
+
                         <p className="text-xs">Already  have an account? <Link to='/logIn'><span className="font-bold text-secondary cursor-pointer">Log In</span></Link> </p>
                     </form>
                 </div>

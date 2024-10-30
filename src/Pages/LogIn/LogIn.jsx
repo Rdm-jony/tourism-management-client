@@ -3,13 +3,29 @@ import registerLottie from '../../../public/registerLottie.json'
 import { Typewriter } from "react-simple-typewriter";
 import { Link } from "react-router-dom";
 import { FaGithub, FaGoogle } from "react-icons/fa";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 const LogIn = () => {
+    const [firebaseError, setFirebaseError] = useState('')
+    const { signInUser } = useContext(AuthContext)
     const handleOnSubmit = (e) => {
+        setFirebaseError('')
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password)
+        signInUser(email, password)
+            .then(result => {
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Successfully loged in!',
+                    icon: 'success',
+                    confirmButtonText: 'continue'
+                })
+                form.reset()
+            })
+            .catch(error => setFirebaseError(error.message))
 
     }
     return (
@@ -41,6 +57,9 @@ const LogIn = () => {
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label>
                         </div>
+                        {
+                            firebaseError && <p className="text-xs text-red-500">{firebaseError}</p>
+                        }
                         <div className="form-control mt-6">
                             <button className="btn bg-secondary text-neutral-50">Login</button>
                         </div>

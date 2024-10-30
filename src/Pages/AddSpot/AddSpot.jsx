@@ -1,7 +1,10 @@
 import { Typewriter } from 'react-simple-typewriter';
 import './AddSpot.css'
+import { useContext } from 'react';
+import { AuthContext } from '../../AuthProvider/AuthProvider';
 
 const AddSpot = () => {
+    const { user } = useContext(AuthContext)
     const handleOnSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -14,7 +17,7 @@ const AddSpot = () => {
         const travelTime = form.travelTime.value;
         const totalVisitors = form.totalVisitors.value;
         const imageURL = form.imageURL.value;
-        const newSpot = { spotName, countryName, location, description, cost, season, travelTime, totalVisitors, imageURL }
+        const newSpot = { spotName, countryName, location, description, cost, season, travelTime, totalVisitors, imageURL, email: user?.email, userName: user?.displayName }
         console.log(newSpot)
     }
     return (

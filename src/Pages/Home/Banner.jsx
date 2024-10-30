@@ -8,9 +8,10 @@ const Banner = () => {
     const images = [banner1, banner2, banner3]
     return (
         <div>
-            <Carousel animationHandler="fade" stopOnHover={false} showIndicators={false} autoPlay={true} interval={5000} infiniteLoop={true} transitionTime={500} >
+            <Carousel animationHandler="fade" stopOnHover={false} showIndicators={false} autoPlay={true} interval={5000} infiniteLoop={true} transitionTime={500} showThumbs={false} >
                 {
-                    images.map(image => <div
+                    images.map((image, idx) => <div
+                        key={idx}
                         className="hero min-h-screen"
                         style={{
                             backgroundImage: `url(${image})`,
