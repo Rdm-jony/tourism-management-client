@@ -7,9 +7,8 @@ import Register from "../Pages/Register/Register";
 import AllSpots from "../Pages/AllSpots/AllSpots";
 import ViewDetails from "../Pages/ViewDetails/ViewDetails";
 import MyList from "../Pages/MyList/MyList";
-import { useContext } from "react";
-import { AuthContext } from "../AuthProvider/AuthProvider";
 import UpdateSpot from "../Pages/UpdateSpot/UpdateSpot";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -29,7 +28,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/addSpot",
-                element: <AddSpot></AddSpot>
+                element: <PrivateRoute><AddSpot></AddSpot></PrivateRoute>
             }, {
                 path: "/allSpots",
                 element: <AllSpots></AllSpots>
@@ -39,7 +38,7 @@ export const router = createBrowserRouter([
                 element: <ViewDetails></ViewDetails>
             }, {
                 path: "/myList",
-                element: <MyList></MyList>
+                element: <PrivateRoute><MyList></MyList></PrivateRoute>
             }, {
                 path: "/updateSpot",
                 element: <UpdateSpot></UpdateSpot>

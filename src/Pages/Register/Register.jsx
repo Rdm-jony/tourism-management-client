@@ -2,11 +2,12 @@ import Lottie from "lottie-react";
 import registerLottie from '../../../public/registerLottie.json'
 import { useForm } from "react-hook-form";
 import { Typewriter } from "react-simple-typewriter";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 const Register = () => {
+    const navigate = useNavigate()
     const [firebaseError, setFirebaseError] = useState('')
     const { createUser, updateUser } = useContext(AuthContext)
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
@@ -23,6 +24,7 @@ const Register = () => {
                             icon: 'success',
                             confirmButtonText: 'ok'
                         })
+                        navigate("/logIn")
                         reset()
                     })
                     .catch(error => setFirebaseError(error.message))

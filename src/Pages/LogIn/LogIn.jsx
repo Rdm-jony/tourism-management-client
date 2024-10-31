@@ -1,12 +1,14 @@
 import Lottie from "lottie-react";
 import registerLottie from '../../../public/registerLottie.json'
 import { Typewriter } from "react-simple-typewriter";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 const LogIn = () => {
+    const location = useLocation()
+    const navigate = useNavigate()
     const [firebaseError, setFirebaseError] = useState('')
     const { signInUser, signInGoogle } = useContext(AuthContext)
     const handleOnSubmit = (e) => {
@@ -23,6 +25,7 @@ const LogIn = () => {
                     icon: 'success',
                     confirmButtonText: 'continue'
                 })
+                navigate(location.state ? location.state : "/")
                 form.reset()
             })
             .catch(error => setFirebaseError(error.message))
@@ -31,12 +34,15 @@ const LogIn = () => {
 
     const handleGoogleSign = () => {
         signInGoogle()
-            .then(result => Swal.fire({
-                title: 'Success!',
-                text: 'Successfully loged in!',
-                icon: 'success',
-                confirmButtonText: 'continue'
-            }))
+            .then(result => {
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Successfully loged in!',
+                    icon: 'success',
+                    confirmButtonText: 'continue'
+                })
+                navigate(location.state ? location.state : "/")
+            })
             .catch(error => setFirebaseError(error.message))
     }
     return (
