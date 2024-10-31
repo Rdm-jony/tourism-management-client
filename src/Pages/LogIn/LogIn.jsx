@@ -8,7 +8,7 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 const LogIn = () => {
     const [firebaseError, setFirebaseError] = useState('')
-    const { signInUser } = useContext(AuthContext)
+    const { signInUser, signInGoogle } = useContext(AuthContext)
     const handleOnSubmit = (e) => {
         setFirebaseError('')
         e.preventDefault();
@@ -27,6 +27,17 @@ const LogIn = () => {
             })
             .catch(error => setFirebaseError(error.message))
 
+    }
+
+    const handleGoogleSign = () => {
+        signInGoogle()
+            .then(result => Swal.fire({
+                title: 'Success!',
+                text: 'Successfully loged in!',
+                icon: 'success',
+                confirmButtonText: 'continue'
+            }))
+            .catch(error => setFirebaseError(error.message))
     }
     return (
         <div className="hero bg-base-200 min-h-screen">
@@ -67,12 +78,12 @@ const LogIn = () => {
 
                         <div className="divider">OR</div>
                         <div className="flex justify-center gap-5">
-                            <div className="avatar placeholder">
+                            <div className="avatar placeholder cursor-pointer" onClick={handleGoogleSign} >
                                 <div className="bg-secondary text-neutral-content w-12 rounded-full">
                                     <FaGoogle></FaGoogle>
                                 </div>
                             </div>
-                            <div className="avatar placeholder">
+                            <div className="avatar placeholder cursor-pointer">
                                 <div className="bg-secondary text-neutral-content w-12 rounded-full">
                                     <FaGithub></FaGithub>
                                 </div>

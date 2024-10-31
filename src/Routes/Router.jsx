@@ -4,6 +4,8 @@ import Home from "../Pages/Home/Home";
 import AddSpot from "../Pages/AddSpot/AddSpot";
 import LogIn from "../Pages/LogIn/LogIn";
 import Register from "../Pages/Register/Register";
+import AllSpots from "../Pages/AllSpots/AllSpots";
+import ViewDetails from "../Pages/ViewDetails/ViewDetails";
 
 export const router = createBrowserRouter([
     {
@@ -24,6 +26,12 @@ export const router = createBrowserRouter([
             {
                 path: "/addSpot",
                 element: <AddSpot></AddSpot>
+            }, {
+                path: "/allSpots",
+                element: <AllSpots></AllSpots>
+            }, {
+                path: "/spot/:id",
+                element: <ViewDetails></ViewDetails>
             }
         ]
 
