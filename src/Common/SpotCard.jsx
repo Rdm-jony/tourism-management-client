@@ -12,7 +12,7 @@ const SpotCard = ({ card }) => {
                     <p className="px-3 py-2 bg-slate-200 bg-opacity-80 rounded-full">{travelTime} Days</p>
                 </div>
                 <div className="w-full  bg-slate-200 bg-opacity-80 z-20 p-5">
-                    <div className="flex justify-between">
+                    <div className="flex justify-between flex-wrap">
                         <h2 className="font-medium text-3xl text-primary">{spotName}</h2>
                         <p className="flex items-center text-xl gap-2">
                             <MdOutlineLocationOn /> {countryName}
