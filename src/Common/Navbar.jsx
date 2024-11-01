@@ -8,10 +8,10 @@ const navlink = <>
     <li><NavLink to='/allSpots'>All Turists Spot</NavLink></li>
     <li><NavLink to="/addSpot">Add Turists Spot</NavLink></li>
     <li><NavLink to='/myList'>My List</NavLink></li>
-
 </>
 const Navbar = () => {
     const { user, logOut, setTheme, theme } = useContext(AuthContext)
+    console.log(user)
     const handleLogOut = () => {
         logOut()
             .then()
@@ -50,19 +50,14 @@ const Navbar = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                            <li><a>Item 1</a></li>
-                            <li>
-                                <a>Parent</a>
-                                <ul className="p-2">
-                                    <li><a>Submenu 1</a></li>
-                                    <li><a>Submenu 2</a></li>
-                                </ul>
-                            </li>
-                            <li><a>Item 3</a></li>
+                            className="menu menu-sm dropdown-content bg-base-100 text-primary rounded-box z-40 mt-3 w-52 p-2 shadow">
+                            {
+                                navlink
+                            }
                         </ul>
                     </div>
-                    <img src={logo} alt="" />
+                    <img className="hidden lg:block" src={logo} alt="" />
+                    <a href="" className="lg:hidden font-bold">Tripitika</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="space-x-10 menu-horizontal  px-1">
@@ -75,7 +70,7 @@ const Navbar = () => {
                         user ? <div className="flex items-center gap-5">
                             <div className="avatar tooltip tooltip-bottom tooltip-secondary" data-tip={user?.displayName}>
                                 <div className="ring-primary ring-offset-base-100 w-10 rounded-full ring ring-offset-2 ">
-                                    <img src={user?.photoURL} />
+                                    <img src={user.photoURL} />
                                 </div>
                             </div>
 

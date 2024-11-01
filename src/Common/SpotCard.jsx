@@ -1,4 +1,5 @@
 import { MdOutlineLocationOn } from "react-icons/md";
+
 import { Link } from "react-router-dom";
 
 const SpotCard = ({ card }) => {

@@ -56,7 +56,7 @@ const AddSpot = () => {
                                 words={['Turists Spot']}
                             >
                             </Typewriter>
-                            
+
                         </span></h2>
                         <div className="form-control">
                             <label className="label">

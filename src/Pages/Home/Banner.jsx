@@ -18,7 +18,7 @@ const Banner = () => {
                         }}>
                         <div className="hero-overlay bg-opacity-60"></div>
                         <div className=" text-neutral-content ">
-                            <div className="text-start text-neutral-50 w-2/3">
+                            <div className="lg:text-start text-center text-neutral-50 lg:w-2/3">
                                 <h1 className="mb-5 text-7xl font-bold leading-normal">Journey to Your Dream <span className="text-primary"><Typewriter
                                     typeSpeed={200}
                                     cursorStyle='_'
