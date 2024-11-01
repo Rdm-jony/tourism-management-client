@@ -9,11 +9,13 @@ import ViewDetails from "../Pages/ViewDetails/ViewDetails";
 import MyList from "../Pages/MyList/MyList";
 import UpdateSpot from "../Pages/UpdateSpot/UpdateSpot";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter([
     {
         path: "/",
         element: <App></App>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: "/",
@@ -35,7 +37,7 @@ export const router = createBrowserRouter([
             }, {
                 path: "/spot/:id",
                 loader: ({ params }) => fetch(`http://localhost:5000/spot/details/${params.id}`),
-                element: <ViewDetails></ViewDetails>
+                element: <PrivateRoute><ViewDetails></ViewDetails></PrivateRoute>
             }, {
                 path: "/myList",
                 element: <PrivateRoute><MyList></MyList></PrivateRoute>

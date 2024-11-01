@@ -1,10 +1,9 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import { Typewriter } from 'react-simple-typewriter'
-import banner1 from '../../assets/banner1.jpg'
-import banner2 from '../../assets/banner2.jpg'
-import banner3 from '../../assets/banner3.jpg'
-import { useLocation } from "react-router-dom";
+import banner1 from '../../assets/banner1.webp'
+import banner2 from '../../assets/banner2.webp'
+import banner3 from '../../assets/banner3.webp'
 const Banner = () => {
     const images = [banner1, banner2, banner3]
     return (

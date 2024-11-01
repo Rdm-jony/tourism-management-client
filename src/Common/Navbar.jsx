@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from '../assets/LOGO.png'
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const navlink = <>
@@ -8,13 +8,26 @@ const navlink = <>
     <li><NavLink to='/allSpots'>All Turists Spot</NavLink></li>
     <li><NavLink to="/addSpot">Add Turists Spot</NavLink></li>
     <li><NavLink to='/myList'>My List</NavLink></li>
+
 </>
 const Navbar = () => {
-    const { user, logOut } = useContext(AuthContext)
+    const { user, logOut, setTheme, theme } = useContext(AuthContext)
     const handleLogOut = () => {
         logOut()
             .then()
             .catch()
+    }
+
+    const handleTheme = (e) => {
+        if (e.target.checked) {
+            localStorage.setItem('theme', 'dark')
+            setTheme('dark')
+
+        } else {
+            localStorage.setItem('theme', 'light')
+            setTheme('light')
+        }
+
     }
     return (
         <div className="bg-secondary">
@@ -57,6 +70,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
+                    <input onClick={handleTheme} type="checkbox" checked={theme == "dark" && true} className="toggle mr-5" />
                     {
                         user ? <div className="flex items-center gap-5">
                             <div className="avatar tooltip tooltip-bottom tooltip-secondary" data-tip={user?.displayName}>

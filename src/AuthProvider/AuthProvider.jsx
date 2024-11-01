@@ -9,6 +9,7 @@ const provider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
+    const [theme, setTheme] = useState(null)
 
     const createUser = (email, password) => {
         setLoading(true)
@@ -49,7 +50,20 @@ const AuthProvider = ({ children }) => {
         }
     }, [])
 
-    const authInfo = { user, createUser, signInUser, updateUser, logOut, loading, signInGoogle }
+    useEffect(() => {
+        const themeData = localStorage.getItem('theme')
+        if (themeData) {
+            setTheme(themeData)
+            document.documentElement.setAttribute('data-theme', theme);
+
+        } else {
+            localStorage.setItem('theme', 'light')
+            document.documentElement.setAttribute('data-theme', theme);
+
+        }
+    }, [theme])
+
+    const authInfo = { user, createUser, signInUser, updateUser, logOut, loading, signInGoogle, setTheme, theme }
     return (
         <div>
             <AuthContext.Provider value={authInfo}>
